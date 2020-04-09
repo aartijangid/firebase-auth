@@ -27,6 +27,7 @@ class App extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({isSignedIn:!! user})
+      console.log(`user ${user}`)
     })
   }
 
@@ -35,8 +36,10 @@ class App extends Component {
       <div className="App">
         {this.state.isSignedIn ? (
           <div>
-          <div>Signed In</div>
-          <button onClick={()=> firebase.auth().signOut()}>Sign out</button> 
+            <div>Signed In</div>
+            <button onClick={()=> firebase.auth().signOut()}>Sign out</button> 
+            <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+            <img alt="profile picture" src={firebase.auth().currentUser.photoURL} />
           </div>
           )
             :
